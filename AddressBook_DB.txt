@@ -16,3 +16,39 @@ mysql> show databases;
 | sys                |
 +--------------------+
 6 rows in set (0.24 sec)
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                    UC2:Ability to create a Address Book Table with first and last names,
+                                        address, city, state, zip, phone                   
+                                        number and email as its attributes.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+mysql> CREATE TABLE AddressBook (
+    ->  AddressBook_Id INT AUTO_INCREMENT PRIMARY KEY,
+    ->  FirstName VARCHAR(255),
+    -> LastName VARCHAR(255),
+    -> City VARCHAR(255),
+    -> Zip INT,
+    -> PhoneNumber VARCHAR(255) NOT NULL,
+    -> Email VARCHAR(255) NOT NULL,
+    -> CONSTRAINT Check_PhoneNumber CHECK (PhoneNumber REGEXP '^[0-9]{10,15}$'),
+    ->  UNIQUE (PhoneNumber)
+    -> );
+Query OK, 0 rows affected (1.72 sec)
+
+mysql> DESCRIBE AddressBook;
++----------------+--------------+------+-----+---------+----------------+
+| Field          | Type         | Null | Key | Default | Extra          |
++----------------+--------------+------+-----+---------+----------------+
+| AddressBook_Id | int          | NO   | PRI | NULL    | auto_increment |
+| FirstName      | varchar(255) | YES  |     | NULL    |                |
+| LastName       | varchar(255) | YES  |     | NULL    |                |
+| City           | varchar(255) | YES  |     | NULL    |                |
+| Zip            | int          | YES  |     | NULL    |                |
+| PhoneNumber    | varchar(255) | NO   | UNI | NULL    |                |
+| Email          | varchar(255) | NO   |     | NULL    |                |
++----------------+--------------+------+-----+---------+----------------+
+7 rows in set (0.17 sec)
