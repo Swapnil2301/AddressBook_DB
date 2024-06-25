@@ -20,9 +20,9 @@ mysql> show databases;
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                                    UC2:Ability to create a Address Book Table with first and last names,
-                                        address, city, state, zip, phone                   
-                                        number and email as its attributes.
+                                    UC2: Ability to Create a Address Book Table with First and Last names,
+                                         Address, City, State, Zip, Phone                   
+                                         Number and Email as its Attributes.
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -52,3 +52,41 @@ mysql> DESCRIBE AddressBook;
 | Email          | varchar(255) | NO   |     | NULL    |                |
 +----------------+--------------+------+-----+---------+----------------+
 7 rows in set (0.17 sec)
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+                                                                  UC3:Ability to insert new Contacts to Address Book
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+mysql> CREATE TABLE AddressBook (
+    ->     AddressBook_Id INT AUTO_INCREMENT PRIMARY KEY,
+    ->     FirstName VARCHAR(255),
+    ->     LastName VARCHAR(255),
+    ->     City VARCHAR(255),
+    ->     Zip INT,
+    ->     PhoneNumber VARCHAR(255) NOT NULL,
+    ->     Email VARCHAR(255) NOT NULL,
+    ->     CONSTRAINT Check_PhoneNumber CHECK (PhoneNumber REGEXP '^[0-9]{10,15}$'),
+    ->     UNIQUE (PhoneNumber)
+    -> );
+Query OK, 0 rows affected (1.14 sec)
+
+mysql> INSERT INTO AddressBook (FirstName, LastName, City, Zip, PhoneNumber, Email)
+    -> VALUES
+    ->     ('Swapnil', 'Yadav', 'Nerul', 400706, '8104345244', 'swapnily@gmail.com'),
+    ->     ('ShockWave', 'Decepticon', 'Cybertron', 420696, '9876543210', 'Shockwave@gmail.com'),
+    ->     ('Manish', 'Khade', 'Mumbai', 400089, '9320559246', 'Manishkhade241099@gmail.com'),
+    ->     ('Anjali', 'Patil', 'Ghansoli_Gaon', 461611, '4616131315', 'anajli123@gmail.notcom'),
+    ->     ('Smital', 'Patil', 'Ghansoli_Gaon', 400701, '8451091205', 'Smital@gmail.com'),
+    ->     ('Anwar', 'Shaikh', 'Navi Mumbai', 400708, '8652741234', 'Anwar@gmail.com'),
+    ->     ('Crook', ';ast', 'Nerul', 400541, '0123456789', 'ftehbakreujkds');
+Query OK, 7 rows affected (0.15 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
