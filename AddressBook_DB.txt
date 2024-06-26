@@ -223,3 +223,97 @@ mysql> select * from addressbook
 |              5 | Smital    | Patil    | Ghansoli_Gaon | 400701 | 8451091205  | Smital@gmail.com       |
 +----------------+-----------+----------+---------------+--------+-------------+------------------------+
 2 rows in set (0.02 sec)
+
+
+
+
+*********************************************************************************************************************************************************************************************
+
+                                                              UC9: Ability to identify each Address Book with name and Type.
+
+*********************************************************************************************************************************************************************************************
+
+
+
+
+mysql> update addressbook
+    -> SET TYPE ='Family
+    '> where FirstNmae='Swapnil';
+    '> ^C
+mysql> update addressbook
+    -> SET TYPE ='Family
+    '> where FirstName='Swapnil';
+    '> ^C
+mysql> update addressbook
+    -> SET TYPE ='Family'
+    -> where FirstName='Swapnil';
+ERROR 1054 (42S22): Unknown column 'TYPE' in 'field list'
+mysql> alter table  addressbook ADD type VARCHAR(255) AFTER LastName;
+Query OK, 0 rows affected (2.52 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update addressbook
+    -> SET Type='Family'
+    -> Where FirstName='Swapnil';
+Query OK, 1 row affected (0.11 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update addressbook
+    -> SET Type='Friend'
+    -> where FirstName='Manish';
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update addressbook
+    -> SET Type='Friend'
+    -> where FirstName='Anwar';
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update addressbook
+    -> SET Type='Friend'
+    -> where FirstName='Anjali';
+Query OK, 1 row affected (0.19 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update addressbook
+    -> SET Type='Friend'
+    -> where FirstName='Anjali';^C
+mysql> update addressbook
+    -> SET Type='Enemy'
+    -> where FirstName='ShockWave';
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from addressbook;
++----------------+-----------+------------+--------+---------------+--------+-------------+-----------------------------+
+| AddressBook_Id | FirstName | LastName   | type   | City          | Zip    | PhoneNumber | Email                       |
++----------------+-----------+------------+--------+---------------+--------+-------------+-----------------------------+
+|              1 | Swapnil   | Yadav      | Family | Nerul         | 400706 | 8104345244  | swapnily@gmail.com          |
+|              2 | ShockWave | Decepticon | Enemy  | Cybertron     | 420696 | 9876543210  | Shockwave@gmail.com         |
+|              3 | Manish    | Khade      | Friend | Mumbai        | 400089 | 9320559246  | Manishkhade241099@gmail.com |
+|              4 | Anjali    | Patil      | Friend | Ghansoli_Gaon | 461611 | 9461324865  | anajli123@gmail.notcom      |
+|              5 | Smital    | Patil      | NULL   | Ghansoli_Gaon | 400701 | 8451091205  | Smital@gmail.com            |
+|              6 | Anwar     | Shaikh     | Friend | Navi Mumbai   | 400708 | 8652741234  | Anwar@gmail.com             |
++----------------+-----------+------------+--------+---------------+--------+-------------+-----------------------------+
+6 rows in set (0.08 sec)
+
+mysql> update addressbook
+    -> SET Type='Friend'
+    -> where FirstName='Smital';
+Query OK, 1 row affected (0.11 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from addressbook;
++----------------+-----------+------------+--------+---------------+-------+--------+-------------+-----------------------------+
+| AddressBook_Id | FirstName | LastName   | type   | City          | State | Zip    | PhoneNumber | Email                       |
++----------------+-----------+------------+--------+---------------+-------+--------+-------------+-----------------------------+
+|              1 | Swapnil   | Yadav      | Family | Nerul         | MH    | 400706 | 8104345244  | swapnily@gmail.com          |
+|              2 | ShockWave | Decepticon | Enemy  | Cybertron     | MH    | 420696 | 9876543210  | Shockwave@gmail.com         |
+|              3 | Manish    | Khade      | Friend | Mumbai        | MH    | 400089 | 9320559246  | Manishkhade241099@gmail.com |
+|              4 | Anjali    | Patil      | Friend | Ghansoli_Gaon | MH    | 461611 | 9461324865  | anajli123@gmail.notcom      |
+|              5 | Smital    | Patil      | Friend | Ghansoli_Gaon | MH    | 400701 | 8451091205  | Smital@gmail.com            |
+|              6 | Anwar     | Shaikh     | Friend | Navi Mumbai   | MH    | 400708 | 8652741234  | Anwar@gmail.com             |
++----------------+-----------+------------+--------+---------------+-------+--------+-------------+-----------------------------+
+6 rows in set (0.00 sec)
+
