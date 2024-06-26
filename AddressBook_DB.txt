@@ -122,3 +122,42 @@ mysql> update addressbook
     -> where FirstName='Anjali';
 Query OK, 1 row affected (0.26 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
+
+*********************************************************************************************************************************************************************************************
+
+                                                              UC5: Ability to delete a Person Using Person's Name
+
+*********************************************************************************************************************************************************************************************
+
+
+
+
+
+
+mysql> delete from addresbook
+    -> where FirstName=Crook;
+ERROR 1146 (42S02): Table 'addressbook_db.addresbook' doesn't exist
+mysql> delete from addressbook
+    -> where FirstName=Crook;
+ERROR 1054 (42S22): Unknown column 'Crook' in 'where clause'
+mysql> delete from addresbook
+    -> where FirstName='Crook';
+ERROR 1146 (42S02): Table 'addressbook_db.addresbook' doesn't exist
+mysql> delete from addressbook
+    -> where FirstName='Crook';
+Query OK, 1 row affected (0.13 sec)
+
+mysql> select * from addressbook:
+    -> ^C
+mysql> select * from addressbook;
++----------------+-----------+------------+---------------+--------+-------------+-----------------------------+
+| AddressBook_Id | FirstName | LastName   | City          | Zip    | PhoneNumber | Email                       |
++----------------+-----------+------------+---------------+--------+-------------+-----------------------------+
+|              1 | Swapnil   | Yadav      | Nerul         | 400706 | 8104345244  | swapnily@gmail.com          |
+|              2 | ShockWave | Decepticon | Cybertron     | 420696 | 9876543210  | Shockwave@gmail.com         |
+|              3 | Manish    | Khade      | Mumbai        | 400089 | 9320559246  | Manishkhade241099@gmail.com |
+|              4 | Anjali    | Patil      | Ghansoli_Gaon | 461611 | 9461324865  | anajli123@gmail.notcom      |
+|              5 | Smital    | Patil      | Ghansoli_Gaon | 400701 | 8451091205  | Smital@gmail.com            |
+|              6 | Anwar     | Shaikh     | Navi Mumbai   | 400708 | 8652741234  | Anwar@gmail.com             |
++----------------+-----------+------------+---------------+--------+-------------+-----------------------------+
+
