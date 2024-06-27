@@ -349,23 +349,22 @@ mysql> select Type,COUNT(*) as Count_AsPh_Number
 *********************************************************************************************************************************************************************************************
 
 
-mysql> SELECT ab.AddressBook_Id, ab.FirstName, ab.LastName, ab.City, ab.State, ab.Zip, ab.PhoneNumber, ab.Email, t.Type
+mysql> SELECT ab.AddressBook_Id, ab.FirstName, ab.LastName, ab.City, ab.State, ab.Zip, ab.PhoneNumber, ab.Email, GROUP_CONCAT(t.Type ORDER BY t.Type SEPARATOR ', ') AS Types
     -> FROM AddressBook ab
     -> JOIN AddressBook_Type abt ON ab.AddressBook_Id = abt.AddressBook_Id
-    -> JOIN Type t ON abt.Type_Id = t.Type_Id;
-+----------------+-----------+------------+---------------+-------+--------+-------------+-----------------------------+--------+
-| AddressBook_Id | FirstName | LastName   | City          | State | Zip    | PhoneNumber | Email                       | Type   |
-+----------------+-----------+------------+---------------+-------+--------+-------------+-----------------------------+--------+
-|              1 | Swapnil   | Yadav      | Nerul         | MH    | 400706 | 8104345244  | swapnily@gmail.com          | Family |
-|              2 | ShockWave | Decepticon | Cybertron     | MH    | 420696 | 9876543210  | Shockwave@gmail.com         | Enemy  |
-|              8 | Firefly   | Patil      | Navi Mumbai   | MH    | 400565 | 8464546582  | rxdcfgvbhj@gmail.com        | Enemy  |
-|              9 | Tommmy    | Khade      | New York      | MH    | 465123 | 8135378465  | gfbdasa@gmail.com           | Enemy  |
-|             10 | Adolf     | Khade      | Berlin        | Ger   | 789654 | 9876541235  | eawrcfgvhbjn@gmail.com      | Enemy  |
-|              1 | Swapnil   | Yadav      | Nerul         | MH    | 400706 | 8104345244  | swapnily@gmail.com          | Friend |
-|              3 | Manish    | Khade      | Mumbai        | MH    | 400089 | 9320559246  | Manishkhade241099@gmail.com | Friend |
-|              4 | Anjali    | Patil      | Ghansoli_Gaon | MH    | 461611 | 9461324865  | anajli123@gmail.notcom      | Friend |
-|              5 | Smital    | Patil      | Ghansoli_Gaon | MH    | 400701 | 8451091205  | Smital@gmail.com            | Friend |
-|              6 | Anwar     | Shaikh     | Navi Mumbai   | MH    | 400708 | 8652741234  | Anwar@gmail.com             | Friend |
-+----------------+-----------+------------+---------------+-------+--------+-------------+-----------------------------+--------+
-10 rows in set (0.00 sec)
+    -> JOIN Type t ON abt.Type_Id = t.Type_Id
+    -> GROUP BY ab.AddressBook_Id, ab.FirstName, ab.LastName, ab.City, ab.State, ab.Zip, ab.PhoneNumber, ab.Email;
++----------------+-----------+------------+---------------+-------+--------+-------------+-----------------------------+----------------+
+| AddressBook_Id | FirstName | LastName   | City          | State | Zip    | PhoneNumber | Email                       | Types          |
++----------------+-----------+------------+---------------+-------+--------+-------------+-----------------------------+----------------+
+|              1 | Swapnil   | Yadav      | Nerul         | MH    | 400706 | 8104345244  | swapnily@gmail.com          | Family, Friend |
+|              2 | ShockWave | Decepticon | Cybertron     | MH    | 420696 | 9876543210  | Shockwave@gmail.com         | Enemy          |
+|              3 | Manish    | Khade      | Mumbai        | MH    | 400089 | 9320559246  | Manishkhade241099@gmail.com | Friend         |
+|              4 | Anjali    | Patil      | Ghansoli_Gaon | MH    | 461611 | 9461324865  | anajli123@gmail.notcom      | Friend         |
+|              5 | Smital    | Patil      | Ghansoli_Gaon | MH    | 400701 | 8451091205  | Smital@gmail.com            | Friend         |
+|              6 | Anwar     | Shaikh     | Navi Mumbai   | MH    | 400708 | 8652741234  | Anwar@gmail.com             | Friend         |
+|              8 | Firefly   | Patil      | Navi Mumbai   | MH    | 400565 | 8464546582  | rxdcfgvbhj@gmail.com        | Enemy          |
+|              9 | Tommmy    | Khade      | New York      | MH    | 465123 | 8135378465  | gfbdasa@gmail.com           | Enemy          |
+|             10 | Adolf     | Khade      | Berlin        | Ger   | 789654 | 9876541235  | eawrcfgvhbjn@gmail.com      | Enemy          |
++----------------+-----------+------------+---------------+-------+--------+-------------+-----------------------------+----------------+
 
